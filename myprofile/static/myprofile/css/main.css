@@ -172,7 +172,9 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 }
 #header #logo{
   text-align: center;
-
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
   display: none;
 }
 #header h4{
