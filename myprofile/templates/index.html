@@ -15,18 +15,15 @@
     <div id="tab-container" class="tab-container">
         <!-- Tab List -->
         <ul class="etabs">
-            <li class="tab" id="tab-about">
-                <a href="#about"><i class="icon-user"></i><span> About Me</span></a>
-            </li>
-            <li class='tab'>
-                <a href="#resume"><i class="icon-file-text"></i><span> Resume</span></a>
-            </li>
-            <li class='tab'>
-                <a href="#portfolio"><i class="icon-globe"></i><span> Web-Apps</span></a>
-            </li>
-            <li class='tab'>
-                <a href="#contact"><i class="icon-envelope"></i><span> Contact</span></a>
-            </li>
+            {% if etab_list %}
+                {% for detail_tab in etab_list %}
+                    <li class='tab'>
+                        <a href="{{ detail_tab.tabs_anchor }}"><i class="{{ detail_tab.tabs_icon }}"></i><span>{{ detail_tab.tabs_text }}</span></a>
+                    </li>
+                {% endfor %}
+            {% else %}
+                tab navigation did not work
+            {% endif %}
         </ul>
         <!-- End Tab List -->
 
@@ -63,33 +60,26 @@
                     </div>
                     <div class="break"></div>
                     <div class="contact-info">
-                        <div class="g1">
-                            <div class="item-box clearfix">
-                                <i class="icon-envelope"></i>
-                                <div class="item-data">
-                                    <h3><a href="mailto:jesmigelcantos@yahoo.com">jesmigelcantos@yahoo.com</a></h3>
-                                    <p>Email Address</p>
+                    {% if contents_aboutme %}
+                        {% for detail_aboutme in contents_aboutme %}
+                            <div class="g1">
+                                <div class="item-box clearfix">
+                                    <i class="{{ detail_aboutme.AboutMe_Link_icon.IconTagText }}"></i>
+                                    <div class="item-data">
+                                        {% if detail_aboutme.AboutMe_Link_icon.LinkType == "Email Address" %}
+                                            <h3><a href="{{ detail_aboutme.AboutMe_Link_link }}">
+                                        {% else %}
+                                            <h3><a href="{{ detail_aboutme.AboutMe_Link_link }}" target="_blank">
+                                        {% endif %}
+                                            {{ detail_aboutme.AboutMe_Link_icon.LinkType }}</a></h3>
+                                            <p>{{ detail_aboutme.AboutMe_Link_link }}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="g1">
-                            <div class="item-box clearfix">
-                                <i class="icon-linkedin"></i>
-                                <div class="item-data">
-                                    <h3><a href="https://au.linkedin.com/in/jesmigel" target="_blank">jesmigel.cantos</a></h3>
-                                    <p>LinkedIn Profile</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="g1">
-                            <div class="item-box clearfix">
-                                <i class="icon-github"></i>
-                                <div class="item-data">
-                                    <h3><a href="https://github.com/hawkeyes64" target="_blank">Git repository</a></h3>
-                                    <p>GitHub Profile</p>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
+                    {% else %}
+                        contents_aboutme did not work
+                    {% endif %}
                     </div>
                 </section>
             </div><!-- Tab About End -->
@@ -175,6 +165,9 @@
                         <div class="image">
                             <img src="{% static "myprofile/images/placeholder.png" %}" alt="Application Preview">
                             <div class="image-overlay">
+                                <div class="image-link">
+                                    <a href="/polls/" class="btn">Full View</a>
+                                </div>
                                 One does not simply relearn a framework and build a web-app in one weekend
                             </div>
                         </div>
