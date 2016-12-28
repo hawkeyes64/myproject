@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myprofile',
     'polls',
+    'big_geo_ballarat',
 ]
 
 MIDDLEWARE = [

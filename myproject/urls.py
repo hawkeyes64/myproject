@@ -17,7 +17,8 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 urlpatterns = [
+    url(r'big_geo_ballarat/', include('big_geo_ballarat.urls')),
     url(r'^polls/', include('polls.urls')),
-    url(r'^myprofile/', include('myprofile.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^', include('myprofile.urls')),
 ]
